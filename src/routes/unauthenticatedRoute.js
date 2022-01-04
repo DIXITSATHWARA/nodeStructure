@@ -14,7 +14,7 @@ auth.post("/signup", checkSchema({
     lastName:{
         isString: true
     },
-    email:{
+    emailAddress:{
         isEmail: true
     },
     password:{
@@ -24,6 +24,16 @@ auth.post("/signup", checkSchema({
         isNumeric: true
     }
 }), unauthenticatedController.signUp);
+
+auth.post("/signin", checkSchema({
+    
+    emailAddress:{
+        isEmail: true
+    },
+    password:{
+        isString: true
+    }
+}), unauthenticatedController.signIn);
 
 
 module.exports = auth
