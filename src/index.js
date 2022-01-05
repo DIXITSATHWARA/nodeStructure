@@ -24,8 +24,12 @@ db.connection.then(console.log("success")).catch(e => console.log(e));
 
 app.use(cookieParser());
 
-app.use(bodyParser.json());
-  
+// app.use(bodyParser.json({limit: '50mb'}));
+// app.use(bodyParser.urlencoded({ limit: '50mb',extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+
 app.use(logger('dev', {
   skip: function (req, res) { return req.originalUrl.includes("/static/"); }
 }))

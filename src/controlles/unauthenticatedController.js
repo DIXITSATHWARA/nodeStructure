@@ -15,7 +15,7 @@ const {
 const ObjectId = require("mongoose").Types.ObjectId;
 
 exports.signUp = async (req, res) => {
-
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.json({
@@ -23,26 +23,18 @@ exports.signUp = async (req, res) => {
         });
     }
 
-    const {
-        firstName,
-        lastName,
-        emailAddress,
-        password,
-        phone
+    let {
+        ..._user
     } = req.body;
 
+    _user.profilePicture = req.file
+    
     let exist = await userModel.find({
-        emailAddress: emailAddress
+        emailAddress: _user.emailAddress
     })
 
     if (exist.length === 0) {
-        let signup = await userModel.create({
-            firstName: firstName,
-            lastName: lastName,
-            emailAddress: emailAddress,
-            password: await encryptPassword(password),
-            phone: phone
-        });
+        let signup = await userModel.create(_user);
 
         if (signup) {
             res.json({
