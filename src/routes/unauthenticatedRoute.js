@@ -35,5 +35,8 @@ auth.post("/signin", checkSchema({
     }
 }), unauthenticatedController.signIn);
 
+auth.post("/check", unauthenticatedController.check);
+
+auth.post("/signout", unauthenticatedController.signout);
 
 module.exports = auth

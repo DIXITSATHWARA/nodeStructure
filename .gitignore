@@ -7,8 +7,6 @@
 
 /Public
 
-.env
-
 package-lock.json
 
 /doc/.~*
