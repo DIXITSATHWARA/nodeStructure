@@ -2,6 +2,11 @@
 
 const ObjectId = require("mongoose").Types.ObjectId;
 
+/**
+ * @description This function is to get users list.
+ * @param req
+ * @param res
+ */
 exports.users = async (req, res) => {
     try {
         return res.json("sss");
