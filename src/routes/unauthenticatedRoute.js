@@ -4,6 +4,12 @@ const {
     checkSchema
 } = require("express-validator");
 
+
+/**
+* @description This multer packege is use for uploading the files.
+* @param file
+* @returns {*}
+*/
 const multer  = require('multer')
 
 var storage = multer.diskStorage({
@@ -19,6 +25,9 @@ var upload = multer({ storage: storage })
 const auth = require("express").Router();
 const unauthenticatedController = require("../controlles/unauthenticatedController");
 
+/**
+ * @description This route is for signup user and check validation schecma.
+ */
 auth.post("/signup", upload.single('profilePicture'), checkSchema({
     firstName:{
         isString: true
@@ -37,6 +46,10 @@ auth.post("/signup", upload.single('profilePicture'), checkSchema({
     }
 }), unauthenticatedController.signUp);
 
+
+/**
+ * @description This route is for signin user and check validation schecma.
+ */
 auth.post("/signin", checkSchema({
     
     emailAddress:{
@@ -47,8 +60,15 @@ auth.post("/signin", checkSchema({
     }
 }), unauthenticatedController.signIn);
 
+/**
+ * @description This route is for check user is authorise or token expired.
+ */
 auth.post("/check", unauthenticatedController.check);
 
+
+/**
+ * @description This route is for signout user.
+ */
 auth.post("/signout", unauthenticatedController.signout);
 
 module.exports = auth
