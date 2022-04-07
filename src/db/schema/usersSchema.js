@@ -2,26 +2,6 @@
 
 const mongoose = require("mongoose");
 
-const file = new mongoose.Schema({
-    fileName: {
-      type: String
-    },
-    fileUrl: {
-      type: String
-    },
-    contentType: {
-      type: String
-    },
-    size: {
-      type: Number
-    },
-    createdTime: {
-      type: String
-    }
-  }, {
-    _id: true
-  });
-
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String
