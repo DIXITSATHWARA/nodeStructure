@@ -1,6 +1,10 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+/**
+ * @description This function is to encypt user password.
+ * @param password
+ */
 async function encryptPassword(password) {
     try{
         const hash = await bcrypt.genSalt(saltRounds);
@@ -11,6 +15,10 @@ async function encryptPassword(password) {
     }
 }
 
+/**
+ * @description This function is to verify user password.
+ * @param password
+ */
 async function checkPassword(password, db_password) {
     try{
         let valid = await bcrypt.compare(password, db_password);
