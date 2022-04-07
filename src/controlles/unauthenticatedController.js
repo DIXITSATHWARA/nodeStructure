@@ -14,8 +14,13 @@ const {
 } = require("../utiles/common");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+/**
+ * @description This function is use to signup a new user.
+ * @param req
+ * @param res
+ */
 exports.signUp = async (req, res) => {
-    
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.json({
@@ -28,7 +33,7 @@ exports.signUp = async (req, res) => {
     } = req.body;
 
     _user.profilePicture = req.file
-    
+
     let exist = await userModel.find({
         emailAddress: _user.emailAddress
     })
@@ -55,6 +60,11 @@ exports.signUp = async (req, res) => {
     }
 }
 
+/**
+ * @description This function is to signin user.
+ * @param req
+ * @param res
+ */
 exports.signIn = async (req, res) => {
 
     const errors = validationResult(req);
@@ -106,10 +116,15 @@ exports.signIn = async (req, res) => {
     }
 }
 
+/**
+ * @description This function is to check is user is authorise or token was expired.
+ * @param req
+ * @param res
+ */
 exports.check = async (req, res) => {
     try {
         if (req.cookies['access_token'] || req.headers['access_token']) {
-            
+
             const token = req.cookies['access_token'] || req.headers['access_token'];
             jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
                 if (err) {
@@ -157,6 +172,11 @@ exports.check = async (req, res) => {
     }
 }
 
+/**
+ * @description This function is to logout user.
+ * @param req
+ * @param res
+ */
 exports.signout = async (req, res) => {
     try {
         res.clearCookie('access_token')
