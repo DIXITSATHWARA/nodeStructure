@@ -5,6 +5,11 @@ const {
 } = require("../db/schema/usersSchema");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+/**
+ * @description This function is use to check is user is authorise and get auth user details.
+ * @param req
+ * @param res
+ */
 const userAuthorization = validateFn => async (req, res, next) => {
 
     let _user = null
@@ -15,7 +20,7 @@ const userAuthorization = validateFn => async (req, res, next) => {
         }
     }]).exec((err, currentUser) => {
 
-        if(err){
+        if (err) {
             console.log(err);
             return res.json({
                 code: 0,
@@ -25,10 +30,10 @@ const userAuthorization = validateFn => async (req, res, next) => {
 
         currentUser = currentUser[0] ? currentUser[0] : []
 
-        if(validateFn(currentUser,req)){
+        if (validateFn(currentUser, req)) {
             req.user = currentUser;
             next();
-        }else{
+        } else {
             res.json({
                 error: "unauthorize"
             })
@@ -38,4 +43,4 @@ const userAuthorization = validateFn => async (req, res, next) => {
 
 }
 
-module.exports = {userAuthorization}
+module.exports = { userAuthorization }
