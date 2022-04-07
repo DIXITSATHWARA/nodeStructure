@@ -1,5 +1,10 @@
 const jwt = require("jsonwebtoken")
 
+/**
+ * @description This function is use to check is user is authorise or token was expired.
+ * @param req
+ * @param res
+ */
 const APIMiddleware = (req, res, next) => {
 
     try {
